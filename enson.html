@@ -6,6 +6,9 @@
     <title>Fish Animation With Bubbles </title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        *{
+            font-family: 'Pacifico', cursive;
+        }
         body {
             margin: 0;
             padding: 0;
@@ -18,7 +21,6 @@
             align-items: center;
             height: 100vh;
             width: 100vw; 
-            font-family: 'Pacifico', cursive;
             overflow: hidden;
         }
         .container {
@@ -204,7 +206,7 @@
         }
         #push-btn {
             position: absolute;
-            bottom: 240px;
+            bottom: 230px;
             left: 46%;
             transform: translateX(-50%);
             width: 120px;
@@ -271,8 +273,10 @@
             color: white;
             width: 280px; 
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-            font-family: 'Roboto', sans-serif;
             box-sizing: border-box; 
+        }
+        #login-form h3 {
+            text-align: center;
         }
         #login-form input {
             width: 100%;
@@ -355,5 +359,47 @@
             <button>Giriş Yap</button>
         </div>
     </div>
+    <script>
+        const users = [];
+        
+        document.querySelector("#login-form button").addEventListener("click", function(event) {
+            event.preventDefault(); 
+            let username = document.querySelector("#login-form input[type='text']").value;
+            let password = document.querySelector("#login-form input[type='password']").value;
+            
+            if (username && password) {
+                users.push({ username, password });
+                console.log("Kayıtlı Kullanıcılar:", users);
+            }
+        });
+        function updateClock() {
+        const clockElement = document.getElementById("live-clock");
+        const now = new Date();
+        const timeString = now.toLocaleTimeString();
+        clockElement.textContent = timeString;
+    }
+    setInterval(updateClock, 1000);
+
+    const clockDiv = document.createElement("div");
+    clockDiv.id = "live-clock";
+    clockDiv.style.position = "absolute";
+    clockDiv.style.top = "20px";
+    clockDiv.style.right = "20px";
+    clockDiv.style.fontSize = "50px"; 
+    clockDiv.style.color = "white";
+    clockDiv.style.fontFamily = "Pacifico, cursive";
+    clockDiv.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    clockDiv.style.padding = "10px";
+    clockDiv.style.borderRadius = "10px";
+    document.body.appendChild(clockDiv);
+    updateClock();
+        document.addEventListener("keydown", function(event) {
+            if (event.key.toLowerCase() === "h") {
+                const form = document.getElementById("login-form");
+                form.style.display = form.style.display === "none" ? "block" : "none";
+            }
+        });
+    </script>
+    
 </body>
 </html>
