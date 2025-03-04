@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish Animation With Bubbles </title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('ark2.jpg') no-repeat center center;
+            background-size: 100vw 100vh; 
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw; 
+            font-family: 'Pacifico', cursive;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        .fish {
+            position: absolute;
+            border-radius: 50% 40% 40% 50%;
+            animation: swim var(--speed) linear infinite;
+            bottom: var(--start-bottom);
+            left: -150px;
+        }
+        .tail {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            left: -50px;
+            top: 5px;
+            clip-path: polygon(100% 50%, 0% 0%, 0% 100%);
+            animation: tail-move 0.5s infinite alternate ease-in-out;
+        }
+        .top-fin {
+            width: 40px;
+            height: 30px;
+            top: -30px;
+            left: 30px;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            position: absolute;
+            animation: fin-move 1s infinite alternate ease-in-out;
+        }
+
+        .bottom-fin {
+            width: 40px;
+            height: 30px;
+            bottom: -30px;
+            left: 30px;
+            clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+            position: absolute;
+            animation: fin-move 1s infinite alternate ease-in-out;
+        }
+        .eye {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: black;
+            border-radius: 50%;
+            top: 25px;
+        }
+        .orange-fish {
+            width: 120px;
+            height: 85px;
+            background-color: #FF6600;
+            --speed: 9s;
+            --start-bottom: 10vh;
+        }
+        .orange-tail { 
+            background-color: #FF4500; 
+        }
+        .orange-top-fin, .orange-bottom-fin { 
+            background-color: #f38942; 
+        }
+        .orange-eye {
+            background-color: black;
+            top: 20px;
+            left: 90px;
+        }
+        .red-fish {
+            width: 100px;
+            height: 65px;
+            background-color: #FF0000; 
+            --speed: 7s;
+            --start-bottom: 50vh;
+            box-shadow: 0 0 15px #FF3030, 0 0 30px #FF0000; 
+            filter: brightness(1.5); 
+        }
+        .red-tail {
+            background-color: #CC0000; 
+            box-shadow: 0 0 10px #FF0000; 
+        }
+        .red-top-fin, .red-bottom-fin {
+            background-color: #FF4040; 
+            box-shadow: 0 0 10px #FF5050; 
+        }
+        .red-eye {
+            background-color: black;
+            top: 18px;
+            left: 80px;
+        }
+        .blue-fish {
+            width: 110px;
+            height: 75px;
+            background-color: #007BFF;
+            --speed: 11s;
+            --start-bottom: 85vh;
+        }
+        .blue-tail { 
+            background-color: #0056b3; 
+        }
+        .blue-top-fin, .blue-bottom-fin { 
+            background-color: #66B3FF; 
+        }
+        .blue-eye {
+            background-color: black;
+            top: 20px;
+            left: 75px;
+        }
+        .yellow-fish {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-top: 80px solid transparent; 
+            border-left: 80px solid #FFD700; 
+            border-bottom: 80px solid transparent; 
+            --speed: 15s;
+            --start-bottom: 30vh;
+            animation: swim var(--speed) linear infinite;
+        }
+        .yellow-tail {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            left: -120px;
+            top: -25px;
+            background-color: #DAA520;
+            clip-path: polygon(100% 50%, 0% 0%, 0% 100%);
+            animation: tail-move 0.5s infinite alternate ease-in-out;
+        }
+        .yellow-eye {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: black;
+            border-radius: 50%;
+            top: -18px;
+            left: -28px;
+        }
+        .green-fish {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-top: 80px solid transparent;
+            border-left: 100px solid #32CD32; 
+            border-bottom: 80px solid transparent; 
+            --speed: 20s;
+            --start-bottom: 60vh;
+            animation: swim var(--speed) linear infinite;
+        }
+        .green-tail {
+            position: absolute;
+            width: 50px;
+            height: 75px;
+            left: -150px;
+            top: -35px;
+            background-color: #228B22;
+            clip-path: polygon(100% 50%, 0% 0%, 0% 100%);
+            animation: tail-move 0.5s infinite alternate ease-in-out;
+        }
+        .green-eye {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background-color: black;
+            border-radius: 50%;
+            top: -20px;
+            left: -35px;
+        }
+        @keyframes swim {
+            0% { left: -150px; transform: rotateY(0deg); }
+            50% { left: 100vw; transform: rotateY(0deg); }
+            51% { transform: rotateY(180deg); }
+            100% { left: -150px; transform: rotateY(180deg); }
+        }
+        @keyframes tail-move {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(10deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        @keyframes fin-move {
+            0% { transform: rotate(5deg); }
+            100% { transform: rotate(-5deg); }
+        }
+        #push-btn {
+            position: absolute;
+            bottom: 240px;
+            left: 46%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 120px; 
+            background-color: rgba(255, 255, 255, 0.5); 
+            border-radius: 50%; 
+            text-align: center;
+            line-height: 120px; 
+            color: #d7580e; 
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(255, 255, 255, 0.6); 
+            animation: bubble 2s infinite; 
+            border: 2px solid rgba(255, 255, 255, 0.8); 
+        }
+        #push-btn:hover {
+            background-color: rgba(255, 255, 255, 0.8); 
+            box-shadow: 0 12px 20px rgba(255, 255, 255, 0.9); 
+        }
+        @keyframes bubble {
+            0% { 
+                transform: translateY(0); 
+            }
+            50% { 
+                transform: translateY(-20px); 
+            }
+            100% { 
+                transform: translateY(0); 
+            }
+        }
+        @keyframes bubbles {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-50px) scale(1.1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) scale(0.9);
+                opacity: 0;
+            }
+        }
+        .bubble {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: bubbles 3s infinite;
+        }
+        #login-form {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s;
+            position: fixed;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7); 
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            width: 280px; 
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            font-family: 'Roboto', sans-serif;
+            box-sizing: border-box; 
+        }
+        #login-form input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.3); 
+            color: white;
+            font-size: 16px;
+            box-sizing: border-box; 
+        }
+        #login-form input::placeholder {
+            color: #ccc; 
+        }
+        #login-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #FF6600;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-sizing: border-box; 
+        }
+        #login-form button:hover {
+            background-color: #e54a00; 
+        }
+        #show-login:checked ~ #login-form {
+            opacity: 1;
+            visibility: visible;
+        }
+        #show-login {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="fish orange-fish">
+            <div class="tail orange-tail"></div>
+            <div class="top-fin orange-top-fin"></div>
+            <div class="bottom-fin orange-bottom-fin"></div>
+            <div class="eye orange-eye"></div>
+        </div>
+        <div class="fish red-fish">
+            <div class="tail red-tail"></div>
+            <div class="top-fin red-top-fin"></div>
+            <div class="bottom-fin red-bottom-fin"></div>
+            <div class="eye red-eye"></div>
+        </div>
+        <div class="fish blue-fish">
+            <div class="tail blue-tail"></div>
+            <div class="top-fin blue-top-fin"></div>
+            <div class="bottom-fin blue-bottom-fin"></div>
+            <div class="eye blue-eye"></div>
+        </div>
+        <div class="fish yellow-fish">
+            <div class="tail yellow-tail"></div>
+            <div class="top-fin yellow-top-fin"></div>
+            <div class="bottom-fin yellow-bottom-fin"></div>
+            <div class="eye yellow-eye"></div>
+        </div>
+        <div class="fish green-fish">
+            <div class="tail green-tail"></div>
+            <div class="top-fin yellow-top-fin"></div>
+            <div class="bottom-fin yellow-bottom-fin"></div>
+            <div class="eye green-eye"></div>
+        </div>
+        <div class="bubble" style="bottom: 150px; left: 50%; width: 15px; height: 15px;"></div>
+        <div class="bubble" style="bottom: 160px; left: 52%; width: 25px; height: 25px;"></div>
+        <label id="push-btn" for="show-login">Push</label>
+        <input type="checkbox" id="show-login">
+        <div id="login-form">
+            <h3>Login</h3>
+            <input type="text" placeholder="Kullanıcı Adı" required>
+            <input type="password" placeholder="Şifre" required>
+            <button>Giriş Yap</button>
+        </div>
+    </div>
+</body>
+</html>
