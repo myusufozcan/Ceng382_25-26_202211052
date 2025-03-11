@@ -354,9 +354,9 @@
         <input type="checkbox" id="show-login">
         <div id="login-form">
             <h3>Login</h3>
-            <input type="text" placeholder="Kullanıcı Adı" required>
-            <input type="password" placeholder="Şifre" required>
-            <button>Giriş Yap</button>
+            <input type="text" id="username" placeholder="Kullanıcı Adı" required>
+            <input type="password" id="password" placeholder="Şifre" required>
+            <button onclick="login()">Giriş Yap</button>
         </div>
     </div>
     <script>
@@ -379,6 +379,17 @@
         clockElement.textContent = timeString;
     }
     setInterval(updateClock, 1000);
+
+    function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (username === 'admin' && password === 'admin') {
+        window.location.href = 'table.html'; 
+    } else {
+        alert('Hatalı giriş!');
+    }
+}
 
     const clockDiv = document.createElement("div");
     clockDiv.id = "live-clock";

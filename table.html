@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Information</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif;
+            background: url('ark2.jpg') no-repeat center center;
+            background-size: cover;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            flex-direction: column; 
+        }
+        .container {
+            width: 80%;
+            max-width: 600px; 
+            margin: 0 auto; 
+        }
+
+        form { 
+            margin-bottom: 20px; 
+            background: rgba(0, 0, 0, 0.6); 
+            padding: 20px; 
+            border-radius: 10px; 
+            width: 100%; 
+            box-sizing: border-box; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input, textarea, button { 
+            display: block; 
+            margin: 10px 0; 
+            padding: 8px; 
+            width: 100%; 
+        }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 20px; 
+            background: rgba(0, 0, 0, 0.6); 
+        }
+        th, td { 
+            border: 1px solid #ccc; 
+            padding: 10px; 
+            text-align: left; 
+            color: white; 
+        }
+        th { 
+            background-color: #444; 
+        }
+        tr:hover { 
+            background-color: #666; 
+        }
+        #sortButton {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 5px 15px;  
+            cursor: pointer;
+            border-radius: 5px;
+            width: auto;  
+            height: 30px;  
+        }
+        #sortButton:hover {
+            background-color: #e68900;
+        }
+        .sort-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Class Information</h2>
+        <form id="classForm">
+            <input type="text" id="className" placeholder="Class Name" required>
+            <input type="number" id="numPeople" placeholder="Number of People" required>
+            <textarea id="description" placeholder="Description" required></textarea>
+            <button type="submit">Add Class</button>
+        </form>
+
+        <table id="classTable">
+            <thead>
+                <tr>
+                    <th>Class Name</th>
+                    <th class="sort-container">
+                        Number of People
+                        <button id="sortButton">Sort</button>
+                    </th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.getElementById("classForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            let className = document.getElementById("className").value;
+            let numPeople = document.getElementById("numPeople").value;
+            let description = document.getElementById("description").value;
+            
+            let table = document.getElementById("classTable").getElementsByTagName('tbody')[0];
+            let newRow = table.insertRow();
+            newRow.innerHTML = `<td>${className}</td><td>${numPeople}</td><td>${description}</td>`;
+
+            newRow.addEventListener("dblclick", function() {
+                table.removeChild(newRow);
+            });
+
+            newRow.addEventListener("mouseover", function() {
+                newRow.style.backgroundColor = "#888";
+            });
+
+            newRow.addEventListener("mouseout", function() {
+                newRow.style.backgroundColor = "";
+            });
+
+            document.getElementById("classForm").reset();
+        });
+
+        document.getElementById("sortButton").addEventListener("click", function() {
+            let table = document.getElementById("classTable").getElementsByTagName('tbody')[0];
+            let rows = Array.from(table.rows);
+
+            rows.sort((a, b) => {
+                return Number(a.cells[1].innerText) - Number(b.cells[1].innerText);
+            });
+
+            table.innerHTML = ""; 
+            rows.forEach(row => table.appendChild(row));
+        });
+    </script>
+</body>
+</html>
