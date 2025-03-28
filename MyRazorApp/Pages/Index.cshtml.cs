@@ -26,19 +26,40 @@ namespace MyRazorApp.Pages
             return NewClass;
         }
 
-        public IActionResult OnPostAdd(ClassInformationModel newClass)
+        public IActionResult OnPostAdd()
         {
-            if (NewClass == null || !ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            newClass.Id = _idCounter++;
-            ClassList.Add(NewClass);
-
-            return RedirectToPage();
+        if (NewClass == null || !ModelState.IsValid)
+        {
+            return Page();
         }
 
+        if (NewClass.Id == 0) 
+        {
+            NewClass.Id = _idCounter++;
+            ClassList.Add(new ClassInformationModel
+            {
+                Id = NewClass.Id,
+                ClassName = NewClass.ClassName,
+                StudentCount = NewClass.StudentCount,
+                Description = NewClass.Description
+            });
+        }
+        else 
+        {
+            var existingClass = ClassList.FirstOrDefault(c => c.Id == NewClass.Id);
+            if (existingClass != null)
+            {
+                existingClass.ClassName = NewClass.ClassName;
+                existingClass.StudentCount = NewClass.StudentCount;
+                existingClass.Description = NewClass.Description;
+            }
+        }
+
+        NewClass = new ClassInformationModel();
+
+        return RedirectToPage();
+
+        }
         public IActionResult OnPostDelete(int id)
         {
             var classToDelete = ClassList.FirstOrDefault(c => c.Id == id);
@@ -66,7 +87,6 @@ namespace MyRazorApp.Pages
 
             return Page();
         }
-
         public IActionResult OnPostUpdate()
         {
             var existingClass = ClassList.FirstOrDefault(c => c.Id == NewClass.Id);
