@@ -25,6 +25,7 @@
 
 <div class="container mt-5">
     <h2 class="text-center mb-4 text-primary">🎓 Class Management System 🎓</h2>
+    
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="card shadow-lg">
@@ -66,45 +67,74 @@
                 <div class="card-header bg-primary text-white text-center">
                     <h5 class="mb-0">📄 Class List</h5>
                 </div>
-                <div class="card-body table-responsive">
-                    <table class="table table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Class Name</th>
-                                <th>Student Count</th>
-                                <th>Description</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (IndexModel.ClassList.Any())
-                            {
-                                @foreach (var item in IndexModel.ClassList)
+                <div class="card-body">
+                    
+                    <!-- Filtering Form -->
+                    <form method="get" class="mb-3">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" name="filterClassName" value="@Model.FilterClassName" placeholder="Filter by class name" />
+                            </div>
+                            <div class="col-md-5">
+                                <input type="number" class="form-control" name="filterStudentCount" value="@Model.FilterStudentCount" placeholder="Filter by student count" />
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" class="btn btn-primary w-100">Filter</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Class Name</th>
+                                    <th>Student Count</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.FilteredClasses.Any())
+                                {
+                                    @foreach (var item in Model.FilteredClasses)
+                                    {
+                                        <tr>
+                                            <td>@item.ClassName</td>
+                                            <td>@item.StudentCount</td>
+                                            <td>@item.Description</td>
+                                            <td>
+                                                <form method="post" class="d-inline">
+                                                    <input type="hidden" name="id" value="@item.Id" />
+                                                    <button type="submit" asp-page-handler="Edit" class="btn btn-warning btn-sm">✏️ Edit</button>
+                                                    <button type="submit" asp-page-handler="Delete" class="btn btn-danger btn-sm">🗑️ Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
                                 {
                                     <tr>
-                                        <td>@item.Id</td>
-                                        <td>@item.ClassName</td>
-                                        <td>@item.StudentCount</td>
-                                        <td>@item.Description</td>
-                                        <td>
-                                            <form method="post" class="d-inline">
-                                                <input type="hidden" name="id" value="@item.Id" />
-                                                <button type="submit" asp-page-handler="Edit" class="btn btn-warning btn-sm">✏️ Edit</button>
-                                                <button type="submit" asp-page-handler="Delete" class="btn btn-danger btn-sm">🗑️ Delete</button>
-                                            </form>
-                                        </td>
+                                        <td colspan="4" class="text-center">No classes found.</td>
                                     </tr>
                                 }
-                            }
-                            else
-                            {
-                                <tr>
-                                    <td colspan="5" class="text-center">No classes added yet.</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination Controls -->
+                    <nav>
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                                <a class="page-link" asp-page="./Index" asp-route-pageNumber="@(Model.PageNumber - 1)" asp-route-filterClassName="@Model.FilterClassName" asp-route-filterStudentCount="@Model.FilterStudentCount">Previous</a>
+                            </li>
+                            <li class="page-item @(Model.PageNumber == Model.TotalPages ? "disabled" : "")">
+                                <a class="page-link" asp-page="./Index" asp-route-pageNumber="@(Model.PageNumber + 1)" asp-route-filterClassName="@Model.FilterClassName" asp-route-filterStudentCount="@Model.FilterStudentCount">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+
                 </div>
             </div>
         </div>
