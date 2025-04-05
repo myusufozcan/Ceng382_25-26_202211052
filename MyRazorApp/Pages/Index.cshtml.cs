@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Linq;
 using MyRazorApp.Models;
-
+#nullable disable
 namespace MyRazorApp.Pages
 {
     public class IndexModel : PageModel
@@ -15,7 +15,7 @@ namespace MyRazorApp.Pages
         public ClassInformationModel NewClass { get; set; } = new ClassInformationModel();
 
         [BindProperty(SupportsGet = true)]
-        public string? FilterClassName { get; set; }
+        public string FilterClassName { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public int? FilterStudentCount { get; set; }
@@ -66,7 +66,7 @@ namespace MyRazorApp.Pages
                 {
                     Id = _idCounter++,
                     ClassName = classNames[random.Next(classNames.Length)] + $" {i}",
-                    StudentCount = random.Next(10, 51), 
+                    StudentCount = random.Next(10, 101), 
                     Description = $"This is a description for class {i}."
                 });
             }
@@ -144,6 +144,6 @@ namespace MyRazorApp.Pages
             }
 
             return RedirectToPage();
-        }
-    }
+ }
+}
 }
