@@ -31,6 +31,11 @@
         background-color: #00cec9;
         color: black;
     }
+
+    td.selected-column {
+        background-color: #dff9fb !important;
+        color: #2d3436;
+    }
 </style>
 
 <div class="container mt-5">
@@ -45,20 +50,20 @@
                 <div class="card-body">
                     <form method="post">
                         <div class="form-group mb-3">
-                            <label for="ClassName">📌 Class Name</label>
-                            <input type="text" class="form-control" asp-for="NewClass.ClassName" id="ClassName" placeholder="Enter class name" />
+                            <label>📌 Class Name</label>
+                            <input type="text" class="form-control" asp-for="NewClass.ClassName" />
                             <span asp-validation-for="NewClass.ClassName" class="text-danger"></span>
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="StudentCount">👥 Student Count</label>
-                            <input type="number" class="form-control" asp-for="NewClass.StudentCount" id="StudentCount" placeholder="Enter student count" />
+                            <label>👥 Student Count</label>
+                            <input type="number" class="form-control" asp-for="NewClass.StudentCount" />
                             <span asp-validation-for="NewClass.StudentCount" class="text-danger"></span>
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="Description">📝 Description</label>
-                            <textarea class="form-control" asp-for="NewClass.Description" id="Description" rows="3" placeholder="Enter description"></textarea>
+                            <label>📝 Description</label>
+                            <textarea class="form-control" asp-for="NewClass.Description" rows="3"></textarea>
                             <span asp-validation-for="NewClass.Description" class="text-danger"></span>
                         </div>
 
@@ -71,6 +76,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-8">
             <div class="card shadow-lg">
                 <div class="card-header bg-primary text-white text-center">
@@ -80,18 +86,22 @@
                     <form method="get" class="mb-3">
                         <div class="row g-2">
                             <div class="col-md-10">
-                                <input type="text" class="form-control" name="SearchTerm" value="@Model.SearchTerm" placeholder="🔍 Search class name, student count, or description" />
+                                <input type="text" class="form-control" name="SearchTerm" value="@Model.SearchTerm" placeholder="🔍 Search..." />
                             </div>
                             <div class="col-md-2">
                                 <button type="submit" class="btn btn-primary w-100">Search</button>
                             </div>
                         </div>
                     </form>
+
                     <form method="post" asp-page-handler="ExportJson">
-                        <input type="hidden" name="isFiltered" value="false" />
+                        <input type="hidden" name="isFiltered" value="@(string.IsNullOrWhiteSpace(Model.SearchTerm) ? "false" : "true")" />
+                        <input type="hidden" name="SearchTerm" value="@Model.SearchTerm" />
+                        <input type="hidden" name="PageNumber" value="@Model.PageNumber" />
                         <input type="hidden" id="SelectedColumnsInputAll" name="selectedColumns" />
                         <button type="submit" class="btn btn-secondary mb-3">⬇ Export JSON</button>
                     </form>
+
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered">
                             <thead>
@@ -114,8 +124,8 @@
                                             <td>
                                                 <form method="post" class="d-inline">
                                                     <input type="hidden" name="id" value="@item.Id" />
-                                                    <button type="submit" asp-page-handler="Edit" class="btn btn-warning btn-sm">✏️ Edit</button>
-                                                    <button type="submit" asp-page-handler="Delete" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">🗑️ Delete</button>
+                                                    <button type="submit" asp-page-handler="Edit" class="btn btn-warning btn-sm">✏️</button>
+                                                    <button type="submit" asp-page-handler="Delete" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">🗑️</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -130,6 +140,7 @@
                             </tbody>
                         </table>
                     </div>
+
                     <nav>
                         <ul class="pagination justify-content-center">
                             <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
@@ -145,12 +156,28 @@
         </div>
     </div>
 </div>
+
 <script>
     const selectedColumns = new Set();
 
+    function updateColumnHighlighting() {
+        document.querySelectorAll("td").forEach(td => td.classList.remove("selected-column"));
+
+        selectedColumns.forEach(index => {
+            document.querySelectorAll("tbody tr").forEach(row => {
+                const cell = row.querySelectorAll("td")[index];
+                if (cell) {
+                    cell.classList.add("selected-column");
+                }
+            });
+        });
+
+        document.getElementById("SelectedColumnsInputAll").value = Array.from(selectedColumns).join(",");
+    }
+
     document.querySelectorAll('th.clickable').forEach(th => {
         th.addEventListener('click', () => {
-            const index = th.getAttribute('data-index');
+            const index = parseInt(th.getAttribute('data-index'));
             if (selectedColumns.has(index)) {
                 selectedColumns.delete(index);
                 th.classList.remove('selected');
@@ -158,7 +185,19 @@
                 selectedColumns.add(index);
                 th.classList.add('selected');
             }
-            document.getElementById("SelectedColumnsInputAll").value = Array.from(selectedColumns).join(",");
+            updateColumnHighlighting();
         });
+    });
+
+    window.addEventListener("DOMContentLoaded", () => {
+        const inputVal = document.getElementById("SelectedColumnsInputAll").value;
+        if (inputVal) {
+            inputVal.split(",").map(Number).forEach(index => {
+                selectedColumns.add(index);
+                const th = document.querySelector(`th[data-index="${index}"]`);
+                if (th) th.classList.add("selected");
+            });
+            updateColumnHighlighting();
+        }
     });
 </script>

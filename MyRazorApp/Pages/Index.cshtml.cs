@@ -17,7 +17,7 @@ namespace MyRazorApp.Pages
         public ClassInformationModel NewClass { get; set; } = new ClassInformationModel();
 
         [BindProperty(SupportsGet = true)]
-        public string SearchTerm { get; set; } = string.Empty; 
+        public string SearchTerm { get; set; } = string.Empty;
 
         public List<ClassInformationModel> FilteredClasses { get; set; } = new();
 
@@ -28,7 +28,7 @@ namespace MyRazorApp.Pages
         public int TotalPages { get; set; }
 
         [BindProperty]
-        public string selectedColumns { get; set; } = string.Empty; 
+        public string selectedColumns { get; set; } = string.Empty;
 
         public void OnGet()
         {
@@ -76,9 +76,7 @@ namespace MyRazorApp.Pages
         public IActionResult OnPostAdd()
         {
             if (NewClass == null)
-            {
                 return Page();
-            }
 
             if (NewClass.Id == 0)
             {
@@ -102,7 +100,6 @@ namespace MyRazorApp.Pages
                 }
             }
 
-            NewClass = new ClassInformationModel();
             return RedirectToPage();
         }
 
@@ -149,32 +146,37 @@ namespace MyRazorApp.Pages
 
         public IActionResult OnPostExportJson(bool isFiltered)
         {
-            var dataToExport = isFiltered ? FilteredClasses : ClassList;
+            var query = ClassList.AsQueryable();
 
-            var columnIndexes = new List<int>();
-
-            if (!string.IsNullOrWhiteSpace(selectedColumns))
+            if (isFiltered && !string.IsNullOrWhiteSpace(SearchTerm))
             {
-                columnIndexes = selectedColumns.Split(',').Select(int.Parse).ToList();
-            }
-            else
-            {
-                columnIndexes = new List<int> { 0, 1, 2 }; 
+                var lowerSearch = SearchTerm.ToLower();
+                query = query.Where(c =>
+                    (!string.IsNullOrEmpty(c.ClassName) && c.ClassName.ToLower().Contains(lowerSearch)) ||
+                    (!string.IsNullOrEmpty(c.Description) && c.Description.ToLower().Contains(lowerSearch)) ||
+                    c.StudentCount.ToString().Contains(lowerSearch));
             }
 
-            var reducedData = dataToExport.Select(item =>
+            // Sadece aktif sayfa verisi
+            var pagedData = query
+                .Skip((PageNumber - 1) * PageSize)
+                .Take(PageSize)
+                .ToList();
+
+            var columnIndexes = !string.IsNullOrWhiteSpace(selectedColumns)
+                ? selectedColumns.Split(',').Select(int.Parse).ToList()
+                : new List<int> { 0, 1, 2 };
+
+            var reducedData = pagedData.Select(item =>
             {
                 var dict = new Dictionary<string, object>();
-
                 if (columnIndexes.Contains(0)) dict["ClassName"] = item.ClassName;
                 if (columnIndexes.Contains(1)) dict["StudentCount"] = item.StudentCount;
                 if (columnIndexes.Contains(2)) dict["Description"] = item.Description;
-
                 return dict;
             }).ToList();
 
             var json = Util.Instance.SerializeToJson(reducedData);
-
             var fileName = isFiltered ? "filtered_classes.json" : "all_classes.json";
             var fileBytes = System.Text.Encoding.UTF8.GetBytes(json);
             return File(fileBytes, "application/json", fileName);
