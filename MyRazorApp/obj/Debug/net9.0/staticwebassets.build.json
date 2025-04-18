@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "XkYDVSNhvRwj2/O9vZfpxvbVSx92nfuB7F4sLAU5jrw=",
+  "Hash": "AY0UiY6mYtFp57NGhCm//Gq207vKdUtfpzFkMcSzeUA=",
   "Source": "MyRazorApp",
   "BasePath": "_content/MyRazorApp",
   "Mode": "Default",
@@ -857,6 +857,27 @@
       "OriginalItemSpec": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
+      "Identity": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\khtmvtm95k-6ao5cucwag.gz",
+      "SourceId": "MyRazorApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/MyRazorApp",
+      "RelativePath": "data/users#[.{fingerprint=6ao5cucwag}]?.json.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\wwwroot\\data\\users.json",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "h7kq9oghhn",
+      "Integrity": "M84mAog66D6lvVLfm6/nL2puAlSIusj2LQhh3ofgzfc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\wwwroot\\data\\users.json"
+    },
+    {
       "Identity": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\l54cks3koe-0j3bgjxly4.gz",
       "SourceId": "MyRazorApp",
       "SourceType": "Discovered",
@@ -1422,6 +1443,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\wwwroot\\data\\users.json",
+      "SourceId": "MyRazorApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\wwwroot\\",
+      "BasePath": "_content/MyRazorApp",
+      "RelativePath": "data/users#[.{fingerprint}]?.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "6ao5cucwag",
+      "Integrity": "0nEy+hkQdVrweOSrFHmuwE+hOyGJqeCxZuM0Bua2c44=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\data\\users.json"
     },
     {
       "Identity": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\wwwroot\\favicon.ico",
@@ -3022,6 +3064,304 @@
         {
           "Name": "integrity",
           "Value": "sha256-0FC1RbVkLkwKhJ1oi+r2Hw4Tm9av6DyJeo95YVvfA3Y="
+        }
+      ]
+    },
+    {
+      "Route": "data/users.6ao5cucwag.json",
+      "AssetFile": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\khtmvtm95k-6ao5cucwag.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.007633587786"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "130"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"M84mAog66D6lvVLfm6/nL2puAlSIusj2LQhh3ofgzfc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 12:19:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"0nEy+hkQdVrweOSrFHmuwE+hOyGJqeCxZuM0Bua2c44=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6ao5cucwag"
+        },
+        {
+          "Name": "label",
+          "Value": "data/users.json"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-0nEy+hkQdVrweOSrFHmuwE+hOyGJqeCxZuM0Bua2c44="
+        }
+      ]
+    },
+    {
+      "Route": "data/users.6ao5cucwag.json",
+      "AssetFile": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\wwwroot\\data\\users.json",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "163"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0nEy+hkQdVrweOSrFHmuwE+hOyGJqeCxZuM0Bua2c44=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 12:19:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6ao5cucwag"
+        },
+        {
+          "Name": "label",
+          "Value": "data/users.json"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-0nEy+hkQdVrweOSrFHmuwE+hOyGJqeCxZuM0Bua2c44="
+        }
+      ]
+    },
+    {
+      "Route": "data/users.6ao5cucwag.json.gz",
+      "AssetFile": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\khtmvtm95k-6ao5cucwag.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "130"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"M84mAog66D6lvVLfm6/nL2puAlSIusj2LQhh3ofgzfc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 12:19:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6ao5cucwag"
+        },
+        {
+          "Name": "label",
+          "Value": "data/users.json.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-M84mAog66D6lvVLfm6/nL2puAlSIusj2LQhh3ofgzfc="
+        }
+      ]
+    },
+    {
+      "Route": "data/users.json",
+      "AssetFile": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\khtmvtm95k-6ao5cucwag.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.007633587786"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "130"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"M84mAog66D6lvVLfm6/nL2puAlSIusj2LQhh3ofgzfc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 12:19:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"0nEy+hkQdVrweOSrFHmuwE+hOyGJqeCxZuM0Bua2c44=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-0nEy+hkQdVrweOSrFHmuwE+hOyGJqeCxZuM0Bua2c44="
+        }
+      ]
+    },
+    {
+      "Route": "data/users.json",
+      "AssetFile": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\wwwroot\\data\\users.json",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "163"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0nEy+hkQdVrweOSrFHmuwE+hOyGJqeCxZuM0Bua2c44=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 12:19:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-0nEy+hkQdVrweOSrFHmuwE+hOyGJqeCxZuM0Bua2c44="
+        }
+      ]
+    },
+    {
+      "Route": "data/users.json.gz",
+      "AssetFile": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\obj\\Debug\\net9.0\\compressed\\khtmvtm95k-6ao5cucwag.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "130"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/json"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"M84mAog66D6lvVLfm6/nL2puAlSIusj2LQhh3ofgzfc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 12:19:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-M84mAog66D6lvVLfm6/nL2puAlSIusj2LQhh3ofgzfc="
         }
       ]
     },

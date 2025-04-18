@@ -96,3 +96,4 @@ C:\Users\PC\OneDrive\Masaüstü\Ceng_382 lab\Ceng382_25-26_202211052\MyRazorApp\
 C:\Users\PC\OneDrive\Masaüstü\Ceng_382 lab\Ceng382_25-26_202211052\MyRazorApp\obj\Debug\net9.0\MyRazorApp.pdb
 C:\Users\PC\OneDrive\Masaüstü\Ceng_382 lab\Ceng382_25-26_202211052\MyRazorApp\obj\Debug\net9.0\MyRazorApp.genruntimeconfig.cache
 C:\Users\PC\OneDrive\Masaüstü\Ceng_382 lab\Ceng382_25-26_202211052\MyRazorApp\obj\Debug\net9.0\ref\MyRazorApp.dll
+C:\Users\PC\OneDrive\Masaüstü\Ceng_382 lab\Ceng382_25-26_202211052\MyRazorApp\obj\Debug\net9.0\compressed\khtmvtm95k-6ao5cucwag.gz
