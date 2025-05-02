@@ -1,22 +1,24 @@
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Http;
 using MyRazorApp.Models;
+using MyRazorApp.Data;
+using Microsoft.EntityFrameworkCore;
 using MyRazorApp.Helpers;
-using System.Collections.Generic;
-using System.Linq;
-using System;
+using System.Text;
 
 namespace MyRazorApp.Pages
 {
     public class IndexModel : PageModel
     {
-        public static List<ClassInformationModel> ClassList { get; set; } = new();
-        public static int _idCounter = 1;
+        private readonly SchoolDbContext _context;
+
+        public IndexModel(SchoolDbContext context)
+        {
+            _context = context;
+        }
 
         [BindProperty]
-        public ClassInformationModel NewClass { get; set; } = new ClassInformationModel();
+        public ClassInformationModel NewClass { get; set; } = new();
 
         [BindProperty(SupportsGet = true)]
         public string? SearchTerm { get; set; }
@@ -24,21 +26,18 @@ namespace MyRazorApp.Pages
         [BindProperty(SupportsGet = true)]
         public int PageNumber { get; set; } = 1;
 
+        [BindProperty]
+        public string? SelectedColumns { get; set; }
+
         public int PageSize { get; set; } = 10;
         public int TotalPages { get; set; }
 
         public List<ClassInformationModel> FilteredClasses { get; set; } = new();
 
-        [BindProperty]
-        public string? selectedColumns { get; set; }
-
         public IActionResult OnGet()
         {
             if (!IsAuthenticated())
                 return RedirectToPage("/Login");
-
-            if (ClassList.Count == 0)
-                GenerateDummyData();
 
             ApplyFilteringAndPaging();
             return Page();
@@ -46,14 +45,14 @@ namespace MyRazorApp.Pages
 
         private void ApplyFilteringAndPaging()
         {
-            var query = ClassList.AsQueryable();
+            var query = _context.Classes.Where(c => c.IsActive).AsQueryable(); 
 
             if (!string.IsNullOrWhiteSpace(SearchTerm))
             {
-                var lowerSearch = SearchTerm.ToLower();
+                var lowerSearch = SearchTerm?.ToLower() ?? string.Empty;
                 query = query.Where(c =>
-                    (!string.IsNullOrEmpty(c.ClassName) && c.ClassName.ToLower().Contains(lowerSearch)) ||
-                    (!string.IsNullOrEmpty(c.Description) && c.Description.ToLower().Contains(lowerSearch)) ||
+                    c.ClassName.ToLower().Contains(lowerSearch) ||
+                    c.Description.ToLower().Contains(lowerSearch) ||
                     c.StudentCount.ToString().Contains(lowerSearch));
             }
 
@@ -62,24 +61,13 @@ namespace MyRazorApp.Pages
             FilteredClasses = query
                 .Skip((PageNumber - 1) * PageSize)
                 .Take(PageSize)
-                .ToList();
-        }
-
-        private void GenerateDummyData()
-        {
-            var random = new Random();
-            string[] classNames = { "Math", "Science", "History", "Physics", "Chemistry", "Biology", "Music", "Art", "Computer Science", "English" };
-
-            for (int i = 1; i <= 100; i++)
-            {
-                ClassList.Add(new ClassInformationModel
+                .Select(c => new ClassInformationModel
                 {
-                    Id = _idCounter++,
-                    ClassName = classNames[random.Next(classNames.Length)] + $" {i}",
-                    StudentCount = random.Next(1, 101),
-                    Description = $"This is a description part for class {i}."
-                });
-            }
+                    Id = c.Id,
+                    ClassName = c.ClassName,
+                    StudentCount = c.StudentCount,
+                    Description = c.Description
+                }).ToList();
         }
 
         public IActionResult OnPostAdd()
@@ -89,40 +77,29 @@ namespace MyRazorApp.Pages
             if (NewClass == null || !ModelState.IsValid)
                 return Page();
 
-            if (NewClass.Id == 0)
+            var classToAdd = new Class
             {
-                NewClass.Id = _idCounter++;
-                ClassList.Add(new ClassInformationModel
-                {
-                    Id = NewClass.Id,
-                    ClassName = NewClass.ClassName,
-                    StudentCount = NewClass.StudentCount,
-                    Description = NewClass.Description
-                });
-            }
-            else
-            {
-                var existingClass = ClassList.FirstOrDefault(c => c.Id == NewClass.Id);
-                if (existingClass != null)
-                {
-                    existingClass.ClassName = NewClass.ClassName;
-                    existingClass.StudentCount = NewClass.StudentCount;
-                    existingClass.Description = NewClass.Description;
-                }
-            }
+                ClassName = NewClass.ClassName,
+                StudentCount = NewClass.StudentCount,
+                Description = NewClass.Description,
+                IsActive = true
+            };
 
-            NewClass = new ClassInformationModel();
+            _context.Classes.Add(classToAdd);
+            _context.SaveChanges();
+
+            NewClass = new();
             return RedirectToPage();
         }
 
         public IActionResult OnPostDelete(int id)
         {
             if (!IsAuthenticated()) return RedirectToPage("/Login");
-
-            var classToDelete = ClassList.FirstOrDefault(c => c.Id == id);
+            var classToDelete = _context.Classes.Find(id);
             if (classToDelete != null)
             {
-                ClassList.Remove(classToDelete);
+                classToDelete.IsActive = false;
+                _context.SaveChanges();
             }
 
             return RedirectToPage();
@@ -132,8 +109,8 @@ namespace MyRazorApp.Pages
         {
             if (!IsAuthenticated()) return RedirectToPage("/Login");
 
-            var classToEdit = ClassList.FirstOrDefault(c => c.Id == id);
-            if (classToEdit != null)
+            var classToEdit = _context.Classes.Find(id);
+            if (classToEdit != null && classToEdit.IsActive)
             {
                 NewClass = new ClassInformationModel
                 {
@@ -152,12 +129,13 @@ namespace MyRazorApp.Pages
         {
             if (!IsAuthenticated()) return RedirectToPage("/Login");
 
-            var existingClass = ClassList.FirstOrDefault(c => c.Id == NewClass.Id);
-            if (existingClass != null)
+            var classToUpdate = _context.Classes.Find(NewClass.Id);
+            if (classToUpdate != null && classToUpdate.IsActive)
             {
-                existingClass.ClassName = NewClass.ClassName;
-                existingClass.StudentCount = NewClass.StudentCount;
-                existingClass.Description = NewClass.Description;
+                classToUpdate.ClassName = NewClass.ClassName;
+                classToUpdate.StudentCount = NewClass.StudentCount;
+                classToUpdate.Description = NewClass.Description;
+                _context.SaveChanges();
             }
 
             return RedirectToPage();
@@ -168,9 +146,9 @@ namespace MyRazorApp.Pages
             if (!IsAuthenticated()) return RedirectToPage("/Login");
 
             var columnIndexes = new List<int>();
-            if (!string.IsNullOrWhiteSpace(selectedColumns))
+            if (!string.IsNullOrWhiteSpace(SelectedColumns))
             {
-                columnIndexes = selectedColumns
+                columnIndexes = SelectedColumns
                     .Split(',', StringSplitOptions.RemoveEmptyEntries)
                     .Where(x => int.TryParse(x, out _))
                     .Select(int.Parse)
@@ -181,25 +159,41 @@ namespace MyRazorApp.Pages
 
             if (isFiltered)
             {
-                var query = ClassList.AsQueryable();
+                var query = _context.Classes.Where(c => c.IsActive).AsQueryable();
 
                 if (!string.IsNullOrWhiteSpace(SearchTerm))
                 {
-                    var lowerSearch = SearchTerm.ToLower();
+                    var lowerSearch = SearchTerm?.ToLower() ?? string.Empty;
                     query = query.Where(c =>
-                        (!string.IsNullOrEmpty(c.ClassName) && c.ClassName.ToLower().Contains(lowerSearch)) ||
-                        (!string.IsNullOrEmpty(c.Description) && c.Description.ToLower().Contains(lowerSearch)) ||
+                        c.ClassName.ToLower().Contains(lowerSearch) ||
+                        c.Description.ToLower().Contains(lowerSearch) ||
                         c.StudentCount.ToString().Contains(lowerSearch));
                 }
 
                 dataToExport = query
                     .Skip((PageNumber - 1) * PageSize)
                     .Take(PageSize)
-                    .ToList();
+                    .Select(c => new ClassInformationModel
+                    {
+                        Id = c.Id,
+                        ClassName = c.ClassName,
+                        StudentCount = c.StudentCount,
+                        Description = c.Description
+                    }).ToList();
             }
             else
             {
-                dataToExport = ClassList;
+                dataToExport = _context.Classes
+                    .Where(c => c.IsActive)
+                    .Skip((PageNumber - 1) * PageSize)
+                    .Take(PageSize)
+                    .Select(c => new ClassInformationModel
+                    {
+                        Id = c.Id,
+                        ClassName = c.ClassName,
+                        StudentCount = c.StudentCount,
+                        Description = c.Description
+                    }).ToList();
             }
 
             var reducedData = dataToExport
@@ -218,7 +212,7 @@ namespace MyRazorApp.Pages
 
             var json = Util.Instance.SerializeToJson(reducedData);
             var fileName = isFiltered ? "filtered_classes.json" : "all_classes.json";
-            var fileBytes = System.Text.Encoding.UTF8.GetBytes(json);
+            var fileBytes = Encoding.UTF8.GetBytes(json);
             return File(fileBytes, "application/json", fileName);
         }
 
@@ -235,13 +229,13 @@ namespace MyRazorApp.Pages
 
         private bool IsAuthenticated()
         {
-            var sessionUsername = HttpContext.Session.GetString("username");
-            var sessionToken = HttpContext.Session.GetString("token");
-            var sessionId = HttpContext.Session.GetString("session_id");
+            var sessionUsername = HttpContext.Session.GetString("username") ?? string.Empty;
+            var sessionToken = HttpContext.Session.GetString("token") ?? string.Empty;
+            var sessionId = HttpContext.Session.GetString("session_id") ?? string.Empty;
 
-            var cookieUsername = Request.Cookies["username"];
-            var cookieToken = Request.Cookies["token"];
-            var cookieSessionId = Request.Cookies["session_id"];
+            var cookieUsername = Request.Cookies["username"] ?? string.Empty;
+            var cookieToken = Request.Cookies["token"] ?? string.Empty;
+            var cookieSessionId = Request.Cookies["session_id"] ?? string.Empty;
 
             return sessionUsername == cookieUsername && sessionToken == cookieToken && sessionId == cookieSessionId;
         }

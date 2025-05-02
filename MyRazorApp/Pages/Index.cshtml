@@ -55,7 +55,6 @@
 
 <div class="container mt-5">
     <h2 class="text-center mb-4 text-primary">🎓 Class Management System 🎓</h2>
-
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="card shadow-lg">
@@ -91,7 +90,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-8">
             <div class="card shadow-lg">
                 <div class="card-header bg-primary text-white text-center">
@@ -108,7 +106,6 @@
                             </div>
                         </div>
                     </form>
-
                     <div class="row g-2 mb-4">
                         <div class="col-md-10"></div>
                         <div class="col-md-2">
@@ -117,15 +114,13 @@
                             </form>
                         </div>
                     </div>
-
                     <form method="post" asp-page-handler="ExportJson">
                         <input type="hidden" name="isFiltered" value="@(string.IsNullOrWhiteSpace(Model.SearchTerm) ? "false" : "true")" />
                         <input type="hidden" name="SearchTerm" value="@Model.SearchTerm" />
                         <input type="hidden" name="PageNumber" value="@Model.PageNumber" />
-                        <input type="hidden" id="SelectedColumnsInputAll" name="selectedColumns" />
+                        <input type="hidden" id="SelectedColumnsInputAll" name="SelectedColumns" />
                         <button type="submit" class="btn btn-secondary mb-3">⬇ Export JSON</button>
                     </form>
-
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered">
                             <thead>
@@ -166,17 +161,24 @@
                     </div>
                 </div>
             </div>
-
-            <nav>
-                <ul class="pagination justify-content-center">
-                    <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
-                        <a class="page-link" asp-page="./Index" asp-route-pageNumber="@(Model.PageNumber - 1)" asp-route-SearchTerm="@Model.SearchTerm">Previous</a>
-                    </li>
-                    <li class="page-item @(Model.PageNumber == Model.TotalPages ? "disabled" : "")">
-                        <a class="page-link" asp-page="./Index" asp-route-pageNumber="@(Model.PageNumber + 1)" asp-route-SearchTerm="@Model.SearchTerm">Next</a>
-                    </li>
-                </ul>
-            </nav>
+            <div class="mt-4 text-center">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                            <a class="page-link" href="?PageNumber=1" aria-label="First">First</a>
+                        </li>
+                        <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                            <a class="page-link" href="?PageNumber=@(Model.PageNumber - 1)" aria-label="Previous">Previous</a>
+                        </li>
+                        <li class="page-item @(Model.PageNumber == Model.TotalPages ? "disabled" : "")">
+                            <a class="page-link" href="?PageNumber=@(Model.PageNumber + 1)" aria-label="Next">Next</a>
+                        </li>
+                        <li class="page-item @(Model.PageNumber == Model.TotalPages ? "disabled" : "")">
+                            <a class="page-link" href="?PageNumber=@Model.TotalPages" aria-label="Last">Last</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
 </div>

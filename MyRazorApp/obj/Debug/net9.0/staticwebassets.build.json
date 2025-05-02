@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AY0UiY6mYtFp57NGhCm//Gq207vKdUtfpzFkMcSzeUA=",
+  "Hash": "JxPBAlmebe0CDW1qe7hHRzg4m2dLsDYPLZAAVz5gfPQ=",
   "Source": "MyRazorApp",
   "BasePath": "_content/MyRazorApp",
   "Mode": "Default",
@@ -1443,6 +1443,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\wwwroot\\data\\SchoolDbContext.cs",
+      "SourceId": "MyRazorApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\wwwroot\\",
+      "BasePath": "_content/MyRazorApp",
+      "RelativePath": "data/SchoolDbContext#[.{fingerprint}]?.cs",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "tyc12z6cgi",
+      "Integrity": "5QVWk3shqlc9l9u+ck69ITc6qPmp/X5MLMOm0MlUGAU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\data\\SchoolDbContext.cs"
     },
     {
       "Identity": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\wwwroot\\data\\users.json",
@@ -3064,6 +3085,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-0FC1RbVkLkwKhJ1oi+r2Hw4Tm9av6DyJeo95YVvfA3Y="
+        }
+      ]
+    },
+    {
+      "Route": "data/SchoolDbContext.cs",
+      "AssetFile": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\wwwroot\\data\\SchoolDbContext.cs",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "338"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5QVWk3shqlc9l9u+ck69ITc6qPmp/X5MLMOm0MlUGAU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 01 May 2025 12:15:42 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-5QVWk3shqlc9l9u+ck69ITc6qPmp/X5MLMOm0MlUGAU="
+        }
+      ]
+    },
+    {
+      "Route": "data/SchoolDbContext.tyc12z6cgi.cs",
+      "AssetFile": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\wwwroot\\data\\SchoolDbContext.cs",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "338"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"5QVWk3shqlc9l9u+ck69ITc6qPmp/X5MLMOm0MlUGAU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 01 May 2025 12:15:42 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "tyc12z6cgi"
+        },
+        {
+          "Name": "label",
+          "Value": "data/SchoolDbContext.cs"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5QVWk3shqlc9l9u+ck69ITc6qPmp/X5MLMOm0MlUGAU="
         }
       ]
     },

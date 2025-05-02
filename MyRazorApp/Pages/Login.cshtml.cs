@@ -26,18 +26,17 @@ namespace MyRazorApp.Pages
             }
 
             var usersJson = System.IO.File.ReadAllText(filePath);
-            var users = JsonSerializer.Deserialize<List<User>>(usersJson);
+            var users = JsonSerializer.Deserialize<List<User>>(usersJson) ?? new List<User>();
 
-            var user = users.FirstOrDefault(u => 
-                u.Username == Username && 
-                u.Password == Password && 
+            var user = users.FirstOrDefault(u =>
+                u.Username == Username &&
+                u.Password == Password &&
                 u.IsActive);
 
             if (user != null)
             {
                 var token = Guid.NewGuid().ToString();
-
-                HttpContext.Session.SetString("username", user.Username);
+                HttpContext.Session.SetString("username", user.Username ?? string.Empty);
                 HttpContext.Session.SetString("token", token);
                 HttpContext.Session.SetString("session_id", HttpContext.Session.Id);
 
@@ -49,7 +48,7 @@ namespace MyRazorApp.Pages
                     SameSite = SameSiteMode.Strict
                 };
 
-                Response.Cookies.Append("username", user.Username, options);
+                Response.Cookies.Append("username", user.Username ?? string.Empty, options);
                 Response.Cookies.Append("token", token, options);
                 Response.Cookies.Append("session_id", HttpContext.Session.Id, options);
 

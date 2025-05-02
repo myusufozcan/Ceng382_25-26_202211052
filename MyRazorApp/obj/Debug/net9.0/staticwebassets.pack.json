@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\wwwroot\\data\\SchoolDbContext.cs",
+      "PackagePath": "staticwebassets\\data\\SchoolDbContext.cs"
+    },
+    {
       "Id": "C:\\Users\\PC\\OneDrive\\Masaüstü\\Ceng_382 lab\\Ceng382_25-26_202211052\\MyRazorApp\\wwwroot\\data\\users.json",
       "PackagePath": "staticwebassets\\data\\users.json"
     },
