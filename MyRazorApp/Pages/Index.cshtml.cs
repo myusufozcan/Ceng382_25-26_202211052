@@ -49,7 +49,7 @@ namespace MyRazorApp.Pages
 
             if (!string.IsNullOrWhiteSpace(SearchTerm))
             {
-                var lowerSearch = SearchTerm?.ToLower() ?? string.Empty;
+                var lowerSearch = SearchTerm.ToLower();
                 query = query.Where(c =>
                     c.ClassName.ToLower().Contains(lowerSearch) ||
                     c.Description.ToLower().Contains(lowerSearch) ||
@@ -163,7 +163,7 @@ namespace MyRazorApp.Pages
 
                 if (!string.IsNullOrWhiteSpace(SearchTerm))
                 {
-                    var lowerSearch = SearchTerm?.ToLower() ?? string.Empty;
+                    var lowerSearch = SearchTerm.ToLower();
                     query = query.Where(c =>
                         c.ClassName.ToLower().Contains(lowerSearch) ||
                         c.Description.ToLower().Contains(lowerSearch) ||
@@ -229,13 +229,13 @@ namespace MyRazorApp.Pages
 
         private bool IsAuthenticated()
         {
-            var sessionUsername = HttpContext.Session.GetString("username") ?? string.Empty;
-            var sessionToken = HttpContext.Session.GetString("token") ?? string.Empty;
-            var sessionId = HttpContext.Session.GetString("session_id") ?? string.Empty;
+            var sessionUsername = HttpContext.Session.GetString("username");
+            var sessionToken = HttpContext.Session.GetString("token");
+            var sessionId = HttpContext.Session.GetString("session_id");
 
-            var cookieUsername = Request.Cookies["username"] ?? string.Empty;
-            var cookieToken = Request.Cookies["token"] ?? string.Empty;
-            var cookieSessionId = Request.Cookies["session_id"] ?? string.Empty;
+            var cookieUsername = Request.Cookies["username"];
+            var cookieToken = Request.Cookies["token"];
+            var cookieSessionId = Request.Cookies["session_id"];
 
             return sessionUsername == cookieUsername && sessionToken == cookieToken && sessionId == cookieSessionId;
         }
