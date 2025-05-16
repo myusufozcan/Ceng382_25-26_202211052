@@ -1,19 +1,17 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace MyRazorApp.Models
+namespace MyRazorApp.Models;
+
+public partial class Class
 {
-    public class Class
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        [Required]
-        public string ClassName { get; set; } = string.Empty;
+    public string ClassName { get; set; } = null!;
 
-        public int StudentCount { get; set; }
+    public int StudentCount { get; set; }
 
-        [Required]
-        public string Description { get; set; } = string.Empty;
+    public string Description { get; set; } = null!;
 
-        public bool IsActive { get; set; }
-    }
+    public bool IsActive { get; set; }
 }

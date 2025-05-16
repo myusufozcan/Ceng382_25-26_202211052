@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using MyRazorApp.Models;
+using MyRazorApp.Models; 
+using MyRazorApp.Data;
+
 
 namespace MyRazorApp.Data
 {

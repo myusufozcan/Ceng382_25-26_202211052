@@ -30,8 +30,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>tyc12z6cgi</Fingerprint>
-      <Integrity>5QVWk3shqlc9l9u+ck69ITc6qPmp/X5MLMOm0MlUGAU=</Integrity>
+      <Fingerprint>swv8k8fc4i</Fingerprint>
+      <Integrity>jPfUeydJgK9eQkP/dVy1HuoJPW2jCR9OFSIRfHCvQ3s=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\data\SchoolDbContext.cs'))</OriginalItemSpec>
